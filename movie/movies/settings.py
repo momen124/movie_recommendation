@@ -19,12 +19,11 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_spectacular",
     "corsheaders",
-   
-    # "movieapp",  # Remove until Phase 2
+    "ratelimit",
+    "movieapp",  # Added for Phase 2
 ]
 
-# Remove AUTH_USER_MODEL until Phase 2
-# AUTH_USER_MODEL = "movieapp.User"
+AUTH_USER_MODEL = "movieapp.User"  # Added for Phase 2
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -135,7 +134,7 @@ LOGGING = {
         },
     },
     "loggers": {
-        "movieapp": { 
+        "movieapp": {
             "handlers": ["console", "file"],
             "level": "INFO",
         },
