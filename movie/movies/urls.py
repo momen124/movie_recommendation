@@ -5,7 +5,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 urlpatterns = [
     path("admin/", admin.site.urls),
     # Temporarily comment out until movies app is created in Phase 2
-     path("api/", include("movies.urls")),
+     #path("api/", include("movies.urls")),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/docs/",
