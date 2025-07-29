@@ -1,17 +1,12 @@
 from pathlib import Path
-import os
 from datetime import timedelta
 from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config("SECRET_KEY", default="django-insecure-#2rbwjvg-10cor)9wk*p$9f)f97*a8fmc&n(k95r-w%@!!qa%0")
-DEBUG = config("DEBUG", default="True", cast=bool)
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost").split(",")
-TMDB_API_KEY = config("TMDB_API_KEY", default="")
-REDIS_HOST = config("REDIS_HOST", default="localhost")
-REDIS_PORT = config("REDIS_PORT", default=6379, cast=int)
-REDIS_DB = config("REDIS_DB", default=0, cast=int)
+SECRET_KEY = config("SECRET_KEY")
+DEBUG = config("DEBUG", cast=bool)
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1").split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -91,8 +86,22 @@ WSGI_APPLICATION = "movies.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USER"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
+        "PORT": config("DB_PORT"),
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': f'redis://{config("REDIS_HOST")}:{config("REDIS_PORT")}/{config("REDIS_DB")}',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
     }
 }
 
@@ -119,19 +128,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-TMDB_API_KEY = os.getenv("TMDB_API_KEY")
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
-}
-REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
-REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
-REDIS_DB = int(os.getenv("REDIS_DB", 0))
+TMDB_API_KEY = config("TMDB_API_KEY")
 
 LOGGING = {
     "version": 1,
@@ -153,8 +150,8 @@ LOGGING = {
     },
 }
 
-SECURE_SSL_REDIRECT = False  # Disable for local development
-SESSION_COOKIE_SECURE = False  # Disable for local HTTP
-CSRF_COOKIE_SECURE = False  # Disable for local HTTP
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
