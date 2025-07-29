@@ -1,12 +1,17 @@
 from pathlib import Path
 import os
 from datetime import timedelta
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-#2rbwjvg-10cor)9wk*p$9f)f97*a8fmc&n(k95r-w%@!!qa%0")
-DEBUG = os.getenv("DEBUG", "True") == "True"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+SECRET_KEY = config("SECRET_KEY", default="django-insecure-#2rbwjvg-10cor)9wk*p$9f)f97*a8fmc&n(k95r-w%@!!qa%0")
+DEBUG = config("DEBUG", default="True", cast=bool)
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost").split(",")
+TMDB_API_KEY = config("TMDB_API_KEY", default="")
+REDIS_HOST = config("REDIS_HOST", default="localhost")
+REDIS_PORT = config("REDIS_PORT", default=6379, cast=int)
+REDIS_DB = config("REDIS_DB", default=0, cast=int)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -20,35 +25,35 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "corsheaders",
     "ratelimit",
-    "movieapp",  # Added for Phase 2
+    "movieapp",
 ]
 
-AUTH_USER_MODEL = "movieapp.User"  # Added for Phase 2
+AUTH_USER_MODEL = "movieapp.User"
 
 REST_FRAMEWORK = {
-      'DEFAULT_AUTHENTICATION_CLASSES': (
-          'rest_framework_simplejwt.authentication.JWTAuthentication',
-      ),
-      'DEFAULT_PERMISSION_CLASSES': (
-          'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-      ),
-      'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-      'PAGE_SIZE': 20,
-      'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-  }
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
 SIMPLE_JWT = {
-      'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-      'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-      'ROTATE_REFRESH_TOKENS': True,
-      'BLACKLIST_AFTER_ROTATION': True,
-      'UPDATE_LAST_LOGIN': False,
-      'ALGORITHM': 'HS256',
-      'SIGNING_KEY': SECRET_KEY,
-      'AUTH_HEADER_TYPES': ('Bearer',),
-      'USER_ID_FIELD': 'id',
-      'USER_ID_CLAIM': 'user_id',
-  }
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': False,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -141,8 +146,8 @@ LOGGING = {
     },
 }
 
-SECURE_SSL_REDIRECT = os.getenv("SECRET_SSL_REDIRECT", "True") == "True"
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False  # Disable for local development
+SESSION_COOKIE_SECURE = False  # Disable for local HTTP
+CSRF_COOKIE_SECURE = False  # Disable for local HTTP
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
