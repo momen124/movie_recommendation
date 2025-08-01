@@ -425,3 +425,33 @@ Not Found: /api/favorite-movies/28/
 Not Found: /api/favorite-movies/27/
 Starting new HTTPS connection (1): api.themoviedb.org:443
 https://api.themoviedb.org:443 "GET /3/movie/1311031?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Unauthorized: /api/favorite-movies/28/
+Not Found: /api/favorite-movies/28/
+Cache invalidated for key: favorite_movie_list_1_page_1 after adding FavoriteMovie id=30
+Unauthorized: /api/movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+FavoriteMovie queryset count: 1
+FavoriteMovie paginated response: count=1, next=None
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 44
+Paginated response: count=44, next=http://127.0.0.1:8000/api/movies/?page=2
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=2 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 44
+Paginated response: count=44, next=http://127.0.0.1:8000/api/movies/?page=3
+Cache invalidated for key: favorite_movie_list_1_page_1 after adding FavoriteMovie id=31
+Cache invalidated for key: favorite_movie_list_1_page_1 after adding FavoriteMovie id=32
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=3 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 60
+Paginated response: count=60, next=None
