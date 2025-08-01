@@ -117,6 +117,14 @@ class FavoriteMovieViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+    def perform_destroy(self, instance):
+        instance_id = instance.id
+        instance.delete()
+        # Invalidate cache for this user's favorite movies list
+        cache_key = f"favorite_movie_list_{self.request.user.id}_page_1"
+        cache.delete(cache_key)
+        logger.info(f"Cache invalidated for key: {cache_key} after deleting FavoriteMovie id={instance_id}")
+
     @method_decorator(cache_page(60 * 15))
     def list(self, request, *args, **kwargs):
         cache_key = f"favorite_movie_list_{request.user.id}_page_{request.GET.get('page', '1')}"
@@ -128,6 +136,7 @@ class FavoriteMovieViewSet(viewsets.ModelViewSet):
         queryset = self.get_queryset()
         logger.info(f"FavoriteMovie queryset count: {queryset.count()}")
         if not queryset.exists():
+            cache.set(cache_key, {'count': 0, 'next': None, 'previous': None, 'results': []}, timeout=60 * 15)
             return Response({'count': 0, 'next': None, 'previous': None, 'results': []})
 
         self.paginator.page_size = 20

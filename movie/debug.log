@@ -252,3 +252,73 @@ Not Found: /api/favorite-movies/10/
 Not Found: /api/favorite-movies/11/
 Not Found: /api/favorite-movies/11/
 Not Found: /api/favorite-movies/9/
+Unauthorized: /api/favorite-movies/
+FavoriteMovie queryset count: 5
+FavoriteMovie paginated response: count=5, next=None
+Not Found: /api/favorite-movies/12/
+Watching for file changes with StatReloader
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/movies/
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+FavoriteMovie queryset count: 3
+FavoriteMovie paginated response: count=3, next=None
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=5
+FavoriteMovie queryset count: 1
+FavoriteMovie paginated response: count=1, next=None
+Cache invalidated for key: favorite_movie_list_3_page_1 after deleting FavoriteMovie id=1
+Unauthorized: /api/favorite-movies/5/
+Not Found: /api/favorite-movies/5/
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=6
+Not Found: /api/favorite-movies/5/
+Not Found: /api/favorite-movies/6/
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=7
+Not Found: /api/favorite-movies/7/
+Not Found: /api/favorite-movies/7/
+Not Found: /api/favorite-movies/6/
+Not Found: /api/favorite-movies/6/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Watching for file changes with StatReloader
+Not Found: /api/favorite-movies/7/
+Not Found: /api/favorite-movies/1/
