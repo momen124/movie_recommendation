@@ -322,3 +322,106 @@ Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
 Watching for file changes with StatReloader
 Not Found: /api/favorite-movies/7/
 Not Found: /api/favorite-movies/1/
+Watching for file changes with StatReloader
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Unauthorized: /api/favorite-movies/
+FavoriteMovie queryset count: 3
+FavoriteMovie paginated response: count=3, next=None
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=16
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=14
+Bad Request: /api/favorite-movies/
+Unauthorized: /api/movies/
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=15
+Not Found: /api/favorite-movies/14/
+Not Found: /api/favorite-movies/14/
+Not Found: /api/favorite-movies/15/
+Not Found: /api/favorite-movies/16/
+Not Found: /api/favorite-movies/14/
+Bad Request: /api/favorite-movies/
+Not Found: /api/favorite-movies/14/
+Unauthorized: /api/movies/2/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/1311031?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Unauthorized: /api/favorite-movies/15/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+Unauthorized: /api/favorite-movies/
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/1087192?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/552524?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Watching for file changes with StatReloader
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Bad Request: /api/register/
+Bad Request: /api/register/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+FavoriteMovie queryset count: 0
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/552524?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Bad Request: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=2 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 44
+Paginated response: count=44, next=http://127.0.0.1:8000/api/movies/?page=3
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/1119878?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Unauthorized: /api/movies/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+FavoriteMovie queryset count: 6
+FavoriteMovie paginated response: count=6, next=None
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 44
+Paginated response: count=44, next=http://127.0.0.1:8000/api/movies/?page=2
+Not Found: /api/favorite-movies/28/
+Not Found: /api/favorite-movies/27/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/1311031?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None

@@ -1,3 +1,4 @@
+# movieapp/views.py
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
@@ -10,7 +11,6 @@ from .serializers import UserSerializer, MovieSerializer, FavoriteMovieSerialize
 from .utils.utils import TMDBUtils
 import logging
 
-# Set up logging
 logger = logging.getLogger(__name__)
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -115,7 +115,11 @@ class FavoriteMovieViewSet(viewsets.ModelViewSet):
         return FavoriteMovie.objects.filter(user=self.request.user).order_by('-added_at')
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        instance = serializer.save(user=self.request.user)
+        # Invalidate cache for this user's favorite movies list
+        cache_key = f"favorite_movie_list_{self.request.user.id}_page_1"
+        cache.delete(cache_key)
+        logger.info(f"Cache invalidated for key: {cache_key} after adding FavoriteMovie id={instance.id}")
 
     def perform_destroy(self, instance):
         instance_id = instance.id
