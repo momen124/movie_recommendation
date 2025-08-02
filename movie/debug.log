@@ -455,3 +455,4 @@ Starting new HTTPS connection (1): api.themoviedb.org:443
 https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
 Queryset count: 60
 Paginated response: count=60, next=None
+Watching for file changes with StatReloader
