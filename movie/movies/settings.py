@@ -62,6 +62,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "http://localhost:3000",
     "https://your-frontend.vercel.app",
 ]
 
@@ -95,10 +96,14 @@ DATABASES = {
     }
 }
 
+REDIS_HOST = config('REDIS_HOST', default='localhost')
+REDIS_PORT = config('REDIS_PORT', default=6379, cast=int)
+REDIS_DB = config('REDIS_DB', default=0, cast=int)
+
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': f'redis://{config("REDIS_HOST")}:{config("REDIS_PORT")}/{config("REDIS_DB")}',
+        'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -131,21 +136,24 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 TMDB_API_KEY = config("TMDB_API_KEY")
 
 LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
         },
-        "file": {
-            "class": "logging.FileHandler",
-            "filename": "debug.log",
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
         },
     },
-    "loggers": {
-        "movieapp": {
-            "handlers": ["console", "file"],
-            "level": "INFO",
+    'loggers': {
+        '': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
         },
     },
 }
