@@ -1,6 +1,7 @@
+# movieapp/views/user_views.py
 from rest_framework import viewsets, generics, permissions
-from ..models import User
-from ..serializers import UserSerializer
+from movieapp.models import User
+from movieapp.serializers import UserSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('id')

@@ -1,15 +1,16 @@
+# movieapp/views/movie_views.py
 import logging
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
-from ..models import Movie
-from ..serializers import MovieSerializer
-from ..utils import sync_tmdb_movies
-from .mixins import CacheMixin
+from movieapp.utils.utils import sync_tmdb_movies, TMDBUtils
+from movieapp.utils.cache_utils import CacheMixin
+from movieapp.models import Movie
+from movieapp.serializers import MovieSerializer
 
 logger = logging.getLogger(__name__)
 
 class MovieViewSet(CacheMixin, viewsets.ModelViewSet):
-    queryset = Movie.objects.all().order_by('id').prefetch_related('genres')  # Optimize genre fetching
+    queryset = Movie.objects.all().order_by('id').prefetch_related('genres')
     serializer_class = MovieSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -19,11 +20,9 @@ class MovieViewSet(CacheMixin, viewsets.ModelViewSet):
         if cached_response:
             return cached_response
 
-        # Sync TMDB data
         page = int(request.GET.get('page', '1'))
         sync_tmdb_movies(page=page)
 
-        # Fetch queryset
         queryset = self.get_queryset()
         logger.info(f"Queryset count: {queryset.count()}")
         if not queryset.exists():
@@ -32,17 +31,18 @@ class MovieViewSet(CacheMixin, viewsets.ModelViewSet):
             self.cache_response(cache_key, empty_response)
             return Response(empty_response)
 
-        # Paginate and serialize
         self.paginator.page_size = 20
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            response = self.get_paginated_response(serializer.data)
-            logger.info(f"Paginated response: count={response.data['count']}, next={response.data['next']}")
-            self.cache_response(cache_key, response.data)
-            return response
+        try:
+            page = self.paginate_queryset(queryset)
+            if page is not None:
+                serializer = self.get_serializer(page, many=True)
+                response = self.get_paginated_response(serializer.data)
+                logger.info(f"Paginated response: count={response.data['count']}, next={response.data['next']}")
+                self.cache_response(cache_key, response.data)
+                return response
+        except Exception as e:
+            logger.error(f"Pagination failed: {str(e)}")
 
-        logger.error("Pagination failed unexpectedly")
         serializer = self.get_serializer(queryset, many=True)
         self.cache_response(cache_key, serializer.data)
         return Response(serializer.data)
@@ -54,6 +54,7 @@ class MovieViewSet(CacheMixin, viewsets.ModelViewSet):
             return cached_response
 
         instance = self.get_object()
+        tmdb_data = TMDBUtils.get_movie_details(instance.tmdb_id)
         serializer = self.get_serializer(instance)
         self.cache_response(cache_key, serializer.data)
         return Response(serializer.data)

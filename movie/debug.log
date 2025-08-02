@@ -456,3 +456,30 @@ https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43b
 Queryset count: 60
 Paginated response: count=60, next=None
 Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/auth_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/user_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/favorite_movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/favorite_movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /api/users/
+Bad Request: /api/users/
+Unauthorized: /api/users/4/
