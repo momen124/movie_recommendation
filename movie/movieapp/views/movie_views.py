@@ -6,6 +6,8 @@ from movieapp.utils.utils import sync_tmdb_movies, TMDBUtils
 from movieapp.utils.cache_utils import CacheMixin
 from movieapp.models import Movie
 from movieapp.serializers import MovieSerializer
+from movieapp.utils.tmdb_utils import TMDBUtils
+from movieapp.utils.sync_utils import sync_tmdb_movies
 
 logger = logging.getLogger(__name__)
 

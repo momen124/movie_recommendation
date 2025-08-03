@@ -483,3 +483,18 @@ Watching for file changes with StatReloader
 Bad Request: /api/users/
 Bad Request: /api/users/
 Unauthorized: /api/users/4/
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/tmdb_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/tmdb_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/tmdb_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/tmdb_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/cache_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/cache_utils.py changed, reloading.
+Watching for file changes with StatReloader

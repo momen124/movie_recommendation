@@ -2,12 +2,12 @@
 import logging
 from django.core.cache import cache
 from rest_framework.response import Response
-
+from movieapp.constants import CACHE_TIMEOUT
 logger = logging.getLogger(__name__)
 
 class CacheMixin:
     """Mixin for handling caching in ViewSets."""
-    cache_timeout = 60 * 15  # 15 minutes
+    cache_timeout = CACHE_TIMEOUT
 
     def get_cache_key(self, request, prefix, identifier=''):
         """Generate a cache key based on request and identifier."""
