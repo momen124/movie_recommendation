@@ -502,3 +502,74 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 /home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
 Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/serializers.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/models.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/serializers.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/models.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework_simplejwt/__init__.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/__init__.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/favorite_movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /api/health/
+Syncing TMDB movies for page 1
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Updated movie: War of the Worlds (TMDB ID: 755898)
+Updated movie: How to Train Your Dragon (TMDB ID: 1087192)
+Updated movie: Night Carnage (TMDB ID: 986206)
+Updated movie: Demon Slayer: Kimetsu no Yaiba Infinity Castle (TMDB ID: 1311031)
+Updated movie: 28 Years Later (TMDB ID: 1100988)
+Updated movie: Phantom (TMDB ID: 715253)
+Updated movie: Lilo & Stitch (TMDB ID: 552524)
+Updated movie: M3GAN 2.0 (TMDB ID: 1071585)
+Updated movie: Happy Gilmore 2 (TMDB ID: 1263256)
+Updated movie: The Fantastic 4: First Steps (TMDB ID: 617126)
+Updated movie: Bride Hard (TMDB ID: 1124619)
+Updated movie: Ice Road: Vengeance (TMDB ID: 1119878)
+Updated movie: Superman (TMDB ID: 1061474)
+Updated movie: Guns Up (TMDB ID: 1181540)
+Updated movie: Karate Kid: Legends (TMDB ID: 1011477)
+Updated movie: Jurassic World Rebirth (TMDB ID: 1234821)
+Updated movie: Man with No Past (TMDB ID: 1315986)
+Updated movie: Ballerina (TMDB ID: 541671)
+Updated movie: KPop Demon Hunters (TMDB ID: 803796)
+Created movie: Ne Zha 2 (TMDB ID: 980477)
+Queryset count: 61
+Paginated response: count=61, next=http://localhost:8000/api/movies/?page=2
+Cached data for movie_list__page_1

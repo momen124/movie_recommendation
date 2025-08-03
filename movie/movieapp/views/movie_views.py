@@ -1,17 +1,27 @@
 # movieapp/views/movie_views.py
-from ratelimit.decorators import ratelimit
+import logging
+from rest_framework import viewsets, permissions
+from rest_framework.response import Response
+from rest_framework.filters import SearchFilter
+from movieapp.models import Movie
+from movieapp.serializers import MovieSerializer
+from movieapp.utils.cache_utils import CacheMixin
 from movieapp.utils.tmdb_utils import TMDBUtils
 from movieapp.utils.sync_utils import sync_tmdb_movies
+from movieapp.constants import PAGE_SIZE  # Updated import
+
+logger = logging.getLogger(__name__)
 
 class MovieViewSet(CacheMixin, viewsets.ModelViewSet):
     """ViewSet for managing movie data with TMDB integration."""
     queryset = Movie.objects.all().order_by('id').prefetch_related('genres')
     serializer_class = MovieSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [SearchFilter]
+    search_fields = ['title', 'description']
 
-    @ratelimit(key='ip', rate='100/h', method='GET')
     def list(self, request, *args, **kwargs):
-        """List movies with pagination and TMDB syncing.
+        """List movies with pagination, TMDB syncing, and search filtering.
         
         Args:
             request: HTTP request object.
@@ -35,7 +45,7 @@ class MovieViewSet(CacheMixin, viewsets.ModelViewSet):
             self.cache_response(cache_key, empty_response)
             return Response(empty_response)
 
-        self.paginator.page_size = 20
+        self.paginator.page_size = PAGE_SIZE
         try:
             page = self.paginate_queryset(queryset)
             if page is not None:
