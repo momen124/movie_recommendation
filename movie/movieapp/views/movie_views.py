@@ -1,22 +1,24 @@
 # movieapp/views/movie_views.py
-import logging
-from rest_framework import viewsets, permissions
-from rest_framework.response import Response
-from movieapp.utils.utils import sync_tmdb_movies, TMDBUtils
-from movieapp.utils.cache_utils import CacheMixin
-from movieapp.models import Movie
-from movieapp.serializers import MovieSerializer
+from ratelimit.decorators import ratelimit
 from movieapp.utils.tmdb_utils import TMDBUtils
 from movieapp.utils.sync_utils import sync_tmdb_movies
 
-logger = logging.getLogger(__name__)
-
 class MovieViewSet(CacheMixin, viewsets.ModelViewSet):
+    """ViewSet for managing movie data with TMDB integration."""
     queryset = Movie.objects.all().order_by('id').prefetch_related('genres')
     serializer_class = MovieSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    @ratelimit(key='ip', rate='100/h', method='GET')
     def list(self, request, *args, **kwargs):
+        """List movies with pagination and TMDB syncing.
+        
+        Args:
+            request: HTTP request object.
+        
+        Returns:
+            Response: Paginated list of movies or cached response.
+        """
         cache_key = self.get_cache_key(request, 'movie_list')
         cached_response = self.get_cached_response(cache_key)
         if cached_response:
@@ -50,6 +52,15 @@ class MovieViewSet(CacheMixin, viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, *args, **kwargs):
+        """Retrieve a single movie by ID with TMDB details.
+        
+        Args:
+            request: HTTP request object.
+            kwargs: URL parameters including movie ID.
+        
+        Returns:
+            Response: Movie details or cached response.
+        """
         cache_key = self.get_cache_key(request, 'movie_detail', kwargs.get('pk'))
         cached_response = self.get_cached_response(cache_key)
         if cached_response:
