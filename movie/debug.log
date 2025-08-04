@@ -1,0 +1,584 @@
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 20
+Paginated response: count=20, next=None
+Watching for file changes with StatReloader
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 21
+Paginated response: count=21, next=http://127.0.0.1:8000/api/movies/?page=2
+Not Found: /api/favorite-movies/
+Not Found: /api/favorite-movies/
+Not Found: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=2 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 40
+Paginated response: count=40, next=None
+Not Found: /api/favorite-movies/
+Not Found: /api/favorite-movies/
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Unauthorized: /api/favorite-movies/
+FavoriteMovie queryset count: 0
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 40
+Paginated response: count=40, next=http://127.0.0.1:8000/api/movies/?page=2
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Unauthorized: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+/home/kuma/movie_recommendation/movie/movieapp/serializers.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/favorite-movies/
+/home/kuma/movie_recommendation/movie/movieapp/serializers.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Bad Request: /api/favorite-movies/
+FavoriteMovie queryset count: 0
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Internal Server Error: /api/favorite-movies/
+Traceback (most recent call last):
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "movieapp_favoritemovie_user_id_movie_id_7ac0cdef_uniq"
+DETAIL:  Key (user_id, movie_id)=(3, 1) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/kuma/movie_recommendation/movie/movieapp/views.py", line 118, in perform_create
+    serializer.save(user=self.request.user)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 989, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "movieapp_favoritemovie_user_id_movie_id_7ac0cdef_uniq"
+DETAIL:  Key (user_id, movie_id)=(3, 1) already exists.
+
+Internal Server Error: /api/favorite-movies/
+Traceback (most recent call last):
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "movieapp_favoritemovie_user_id_movie_id_7ac0cdef_uniq"
+DETAIL:  Key (user_id, movie_id)=(3, 1) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/kuma/movie_recommendation/movie/movieapp/views.py", line 118, in perform_create
+    serializer.save(user=self.request.user)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 989, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "movieapp_favoritemovie_user_id_movie_id_7ac0cdef_uniq"
+DETAIL:  Key (user_id, movie_id)=(3, 1) already exists.
+
+/home/kuma/movie_recommendation/movie/movieapp/serializers.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Unauthorized: /api/favorite-movies/
+FavoriteMovie queryset count: 1
+FavoriteMovie paginated response: count=1, next=None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Bad Request: /api/favorite-movies/
+/home/kuma/movie_recommendation/movie/movieapp/serializers.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Unauthorized: /api/favorite-movies/
+FavoriteMovie queryset count: 7
+FavoriteMovie paginated response: count=7, next=None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Bad Request: /api/favorite-movies/
+Not Found: /api/favorite-movies/10/
+Not Found: /api/favorite-movies/9/
+Not Found: /api/favorite-movies/8/
+Not Found: /api/favorite-movies/10/
+Not Found: /api/favorite-movies/10/
+Not Found: /api/favorite-movies/10/
+Not Found: /api/favorite-movies/10/
+Not Found: /api/favorite-movies/11/
+Not Found: /api/favorite-movies/11/
+Not Found: /api/favorite-movies/9/
+Unauthorized: /api/favorite-movies/
+FavoriteMovie queryset count: 5
+FavoriteMovie paginated response: count=5, next=None
+Not Found: /api/favorite-movies/12/
+Watching for file changes with StatReloader
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/movies/
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+FavoriteMovie queryset count: 3
+FavoriteMovie paginated response: count=3, next=None
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=5
+FavoriteMovie queryset count: 1
+FavoriteMovie paginated response: count=1, next=None
+Cache invalidated for key: favorite_movie_list_3_page_1 after deleting FavoriteMovie id=1
+Unauthorized: /api/favorite-movies/5/
+Not Found: /api/favorite-movies/5/
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=6
+Not Found: /api/favorite-movies/5/
+Not Found: /api/favorite-movies/6/
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=7
+Not Found: /api/favorite-movies/7/
+Not Found: /api/favorite-movies/7/
+Not Found: /api/favorite-movies/6/
+Not Found: /api/favorite-movies/6/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Watching for file changes with StatReloader
+Not Found: /api/favorite-movies/7/
+Not Found: /api/favorite-movies/1/
+Watching for file changes with StatReloader
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Unauthorized: /api/favorite-movies/
+FavoriteMovie queryset count: 3
+FavoriteMovie paginated response: count=3, next=None
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=16
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=14
+Bad Request: /api/favorite-movies/
+Unauthorized: /api/movies/
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Cache invalidated for key: favorite_movie_list_5_page_1 after deleting FavoriteMovie id=15
+Not Found: /api/favorite-movies/14/
+Not Found: /api/favorite-movies/14/
+Not Found: /api/favorite-movies/15/
+Not Found: /api/favorite-movies/16/
+Not Found: /api/favorite-movies/14/
+Bad Request: /api/favorite-movies/
+Not Found: /api/favorite-movies/14/
+Unauthorized: /api/movies/2/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/1311031?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Unauthorized: /api/favorite-movies/15/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+Unauthorized: /api/favorite-movies/
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/1087192?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/552524?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Watching for file changes with StatReloader
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Bad Request: /api/register/
+Bad Request: /api/register/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+FavoriteMovie queryset count: 0
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 41
+Paginated response: count=41, next=http://127.0.0.1:8000/api/movies/?page=2
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/552524?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Bad Request: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=2 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 44
+Paginated response: count=44, next=http://127.0.0.1:8000/api/movies/?page=3
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/1119878?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+/home/kuma/movie_recommendation/movie/movieapp/views.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Bad Request: /api/favorite-movies/
+Unauthorized: /api/movies/
+Unauthorized: /api/favorite-movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+FavoriteMovie queryset count: 6
+FavoriteMovie paginated response: count=6, next=None
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 44
+Paginated response: count=44, next=http://127.0.0.1:8000/api/movies/?page=2
+Not Found: /api/favorite-movies/28/
+Not Found: /api/favorite-movies/27/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/1311031?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Unauthorized: /api/favorite-movies/28/
+Not Found: /api/favorite-movies/28/
+Cache invalidated for key: favorite_movie_list_1_page_1 after adding FavoriteMovie id=30
+Unauthorized: /api/movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/favorite-movies/
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+FavoriteMovie queryset count: 1
+FavoriteMovie paginated response: count=1, next=None
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 44
+Paginated response: count=44, next=http://127.0.0.1:8000/api/movies/?page=2
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=2 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 44
+Paginated response: count=44, next=http://127.0.0.1:8000/api/movies/?page=3
+Cache invalidated for key: favorite_movie_list_1_page_1 after adding FavoriteMovie id=31
+Cache invalidated for key: favorite_movie_list_1_page_1 after adding FavoriteMovie id=32
+Unauthorized: /api/movies/
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=3 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Queryset count: 60
+Paginated response: count=60, next=None
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/auth_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/user_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/favorite_movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/favorite_movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /api/users/
+Bad Request: /api/users/
+Unauthorized: /api/users/4/
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/tmdb_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/tmdb_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/tmdb_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/tmdb_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/cache_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/cache_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/tmdb_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/serializers.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/models.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/serializers.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/models.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/venv/lib/python3.10/site-packages/rest_framework_simplejwt/__init__.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/__init__.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/favorite_movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /api/health/
+Syncing TMDB movies for page 1
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/movie/popular?api_key=f56c4a60d742a43bd902a60a92b83cb3&page=1 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.themoviedb.org:443
+https://api.themoviedb.org:443 "GET /3/genre/movie/list?api_key=f56c4a60d742a43bd902a60a92b83cb3 HTTP/1.1" 200 None
+Updated movie: War of the Worlds (TMDB ID: 755898)
+Updated movie: How to Train Your Dragon (TMDB ID: 1087192)
+Updated movie: Night Carnage (TMDB ID: 986206)
+Updated movie: Demon Slayer: Kimetsu no Yaiba Infinity Castle (TMDB ID: 1311031)
+Updated movie: 28 Years Later (TMDB ID: 1100988)
+Updated movie: Phantom (TMDB ID: 715253)
+Updated movie: Lilo & Stitch (TMDB ID: 552524)
+Updated movie: M3GAN 2.0 (TMDB ID: 1071585)
+Updated movie: Happy Gilmore 2 (TMDB ID: 1263256)
+Updated movie: The Fantastic 4: First Steps (TMDB ID: 617126)
+Updated movie: Bride Hard (TMDB ID: 1124619)
+Updated movie: Ice Road: Vengeance (TMDB ID: 1119878)
+Updated movie: Superman (TMDB ID: 1061474)
+Updated movie: Guns Up (TMDB ID: 1181540)
+Updated movie: Karate Kid: Legends (TMDB ID: 1011477)
+Updated movie: Jurassic World Rebirth (TMDB ID: 1234821)
+Updated movie: Man with No Past (TMDB ID: 1315986)
+Updated movie: Ballerina (TMDB ID: 541671)
+Updated movie: KPop Demon Hunters (TMDB ID: 803796)
+Created movie: Ne Zha 2 (TMDB ID: 980477)
+Queryset count: 61
+Paginated response: count=61, next=http://localhost:8000/api/movies/?page=2
+Cached data for movie_list__page_1
+/home/kuma/movie_recommendation/movie/movieapp/utils/cache_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/utils/sync_utils.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/favorite_movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+/home/kuma/movie_recommendation/movie/movieapp/views/movie_views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
