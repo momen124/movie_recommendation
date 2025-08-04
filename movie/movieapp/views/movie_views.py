@@ -1,4 +1,3 @@
-# movieapp/views/movie_views.py
 import logging
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response

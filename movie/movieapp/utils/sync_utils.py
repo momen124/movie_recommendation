@@ -1,4 +1,3 @@
-# movieapp/utils/sync_utils.py
 import logging
 from django.core.cache import cache
 from movieapp.models import Movie, Genre
