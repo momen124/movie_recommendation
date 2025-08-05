@@ -86,15 +86,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "movies.wsgi.application"
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
-    }
+    'default': dj_database_url.config(
+        default=config("DATABASE_URL", default=f"postgres://{config('DB_USER')}:{config('DB_PASSWORD')}@{config('DB_HOST')}:{config('DB_PORT')}/{config('DB_NAME')}"),
+        conn_max_age=600,
+        ssl_require=True  # Required for Render's PostgreSQL
+    )
 }
 
 REDIS_HOST = config('REDIS_HOST', default='localhost')
