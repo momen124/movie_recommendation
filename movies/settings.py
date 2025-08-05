@@ -89,13 +89,27 @@ WSGI_APPLICATION = "movies.wsgi.application"
 
 
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', f"postgres://{os.getenv('DB_USER', 'movie_user')}:{os.getenv('DB_PASSWORD', '3UJHkiaGUAFG937viXEfJpwM3sjkAo0r')}@{os.getenv('DB_HOST', 'localhost')}:{os.getenv('DB_PORT', '5432')}/{os.getenv('DB_NAME', 'movie_db_9xev')}"),
-        conn_max_age=600,
-        ssl_require=True  # Required for Render's PostgreSQL
-    )
-}
+import dj_database_url
+import os
+
+# Check if DATABASE_URL is set, otherwise use local fallback
+DATABASE_URL = os.getenv('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True  # Required for Render's PostgreSQL
+        )
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=f"postgres://{os.getenv('DB_USER', 'movie_user')}:{os.getenv('DB_PASSWORD', '3UJHkiaGUAFG937viXEfJpwM3sjkAo0r')}@{os.getenv('DB_HOST', 'localhost')}:{os.getenv('DB_PORT', '5432')}/{os.getenv('DB_NAME', 'movie_db_9xev')}",
+            conn_max_age=600,
+            ssl_require=False  # Optional for local development
+        )
+    }
 
 REDIS_HOST = config('REDIS_HOST', default='localhost')
 REDIS_PORT = config('REDIS_PORT', default=6379, cast=int)
