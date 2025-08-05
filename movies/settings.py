@@ -2,6 +2,7 @@ from pathlib import Path
 from datetime import timedelta
 from decouple import config
 import dj_database_url
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -87,9 +88,10 @@ TEMPLATES = [
 WSGI_APPLICATION = "movies.wsgi.application"
 
 
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=config("DATABASE_URL", default=f"postgres://{config('DB_USER')}:{config('DB_PASSWORD')}@{config('DB_HOST')}:{config('DB_PORT')}/{config('DB_NAME')}"),
+        default=os.getenv('DATABASE_URL', f"postgres://{os.getenv('DB_USER', 'movie_user')}:{os.getenv('DB_PASSWORD', '3UJHkiaGUAFG937viXEfJpwM3sjkAo0r')}@{os.getenv('DB_HOST', 'localhost')}:{os.getenv('DB_PORT', '5432')}/{os.getenv('DB_NAME', 'movie_db_9xev')}"),
         conn_max_age=600,
         ssl_require=True  # Required for Render's PostgreSQL
     )
