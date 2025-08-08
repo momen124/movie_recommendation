@@ -6,7 +6,7 @@ services:
     environment:
       - POSTGRES_DB=movie_db
       - POSTGRES_USER=movie_user
-      - POSTGRES_PASSWORD=new_secure_password
+      - POSTGRES_PASSWORD=secure_password_123
     ports:
       - "5433:5432"
 
@@ -21,10 +21,10 @@ services:
       - db
       - redis
     environment:
-      - DATABASE_URL=postgres://movie_user:new_secure_password@db:5432/movie_db
+      - DATABASE_URL=postgres://movie_user:secure_password_123@db:5432/movie_db
       - REDIS_URL=redis://redis:6379/0
-      - SECRET_KEY=your_new_secure_key_here
-      - DEBUG=False
+      - SECRET_KEY=secure_key_123
+      - DEBUG=True
       - ALLOWED_HOSTS=3.95.239.25,ec2-3-95-239-25.compute-1.amazonaws.com,localhost,127.0.0.1
       - TMDB_API_KEY=f56c4a60d742a43bd902a60a92b83cb3
       - EC2_PUBLIC_IP=3.95.239.25
