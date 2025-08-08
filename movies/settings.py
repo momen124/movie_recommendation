@@ -4,13 +4,22 @@ from decouple import config
 import dj_database_url
 import os
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security and Environment Settings
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("SECRET_KEY")
-DEBUG = config("DEBUG", default=False, cast=bool)  # False for production on EC2
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="3.95.239.25,ec2-3-95-239-25.compute-1.amazonaws.com").split(",")  # EC2 IP and DNS
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config("DEBUG", default=False, cast=bool)  # Set to False for production on EC2
+
+# Allowed hosts for EC2 public IP, DNS, and local testing
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS",
+    default="3.95.239.25,ec2-3-95-239-25.compute-1.amazonaws.com,localhost,127.0.0.1"
+).split(",")
+
+# Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -25,8 +34,10 @@ INSTALLED_APPS = [
     "movieapp",
 ]
 
+# Custom user model
 AUTH_USER_MODEL = "movieapp.User"
 
+# REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -39,6 +50,7 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
+# JWT settings for authentication
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
@@ -52,6 +64,7 @@ SIMPLE_JWT = {
     'USER_ID_CLAIM': 'user_id',
 }
 
+# Middleware configuration
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -63,17 +76,23 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# CORS Settings for EC2 and Docker
+# CORS settings for EC2 and local testing
 CORS_ALLOWED_ORIGINS = [
-    f"http://{config('EC2_PUBLIC_IP', default='3.95.239.25')}",  # EC2 public IP
-    f"https://{config('EC2_PUBLIC_IP', default='3.95.239.25')}",  # For future SSL
-    "http://localhost:5173",
-    "http://localhost:3000",
-    "https://your-frontend.vercel.app",
+    f"http://{config('EC2_PUBLIC_IP', default='3.95.239.25')}",
+    f"https://{config('EC2_PUBLIC_IP', default='3.95.239.25')}",
+    "http://localhost:8080",  # For local testing on EC2
+    "http://localhost:5173",  # For frontend development
+    "http://localhost:3000",  # For frontend development
+    "https://your-frontend.vercel.app",  # Replace with your actual frontend domain
 ]
 
+# CSRF trusted origins (must match CORS_ALLOWED_ORIGINS)
+CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
+
+# URL configuration
 ROOT_URLCONF = "movies.urls"
 
+# Template configuration
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -89,34 +108,25 @@ TEMPLATES = [
     },
 ]
 
+# WSGI application
 WSGI_APPLICATION = "movies.wsgi.application"
 
-# Database Configuration for Docker Compose
+# Database configuration for Docker Compose
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL', default='postgres://movie_user:new_secure_password@db:5432/movie_db'),  # Default for Docker Compose
+        default=config('DATABASE_URL', default='postgres://movie_user:new_secure_password@db:5432/movie_db'),
         conn_max_age=600,
         ssl_require=False
     )
 }
 
-# Fallback for local development (optional, remove if using Docker exclusively)
-if 'DATABASE_URL' not in os.environ:
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='movie_db'),
-        'USER': config('DB_USER', default='movie_user'),
-        'PASSWORD': config('DB_PASSWORD', default='new_secure_password'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
-    }
-
-# Redis Configuration (adjust if using a containerized Redis)
-REDIS_HOST = config('REDIS_HOST', default='localhost')
+# Redis configuration (assumes Redis service in docker-compose.yml)
+REDIS_HOST = config('REDIS_HOST', default='redis')
 REDIS_PORT = config('REDIS_PORT', default=6379, cast=int)
 REDIS_DB = config('REDIS_DB', default=0, cast=int)
 REDIS_URL = config('REDIS_URL', default=f'redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}')
 
+# Cache configuration using Redis
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -127,6 +137,7 @@ CACHES = {
     }
 }
 
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -134,24 +145,30 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+# Internationalization
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
+# Media files
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# TMDB API key
 TMDB_API_KEY = config("TMDB_API_KEY")
 if not TMDB_API_KEY:
     raise ValueError("TMDB_API_KEY must be set in environment variables")
 
+# Logging configuration
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -175,10 +192,9 @@ LOGGING = {
     },
 }
 
-# Security Settings for Production
-SECURE_SSL_REDIRECT = not DEBUG
-SESSION_COOKIE_SECURE = not DEBUG
-CSRF_COOKIE_SECURE = not DEBUG
-CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
+# Security settings for production
+SECURE_SSL_REDIRECT = not DEBUG  # Redirect to HTTPS in production
+SESSION_COOKIE_SECURE = not DEBUG  # Use secure cookies in production
+CSRF_COOKIE_SECURE = not DEBUG  # Use secure CSRF cookies in production
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
