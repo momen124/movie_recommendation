@@ -6,9 +6,10 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Security and Environment Settings
 SECRET_KEY = config("SECRET_KEY")
-DEBUG = config("DEBUG", default=False, cast=bool)
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1,.onrender.com").split(",")
+DEBUG = config("DEBUG", default=False, cast=bool)  # False for production on EC2
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="3.95.239.25,ec2-3-95-239-25.compute-1.amazonaws.com").split(",")  # EC2 IP and DNS
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -62,7 +63,10 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# CORS Settings for EC2 and Docker
 CORS_ALLOWED_ORIGINS = [
+    f"http://{config('EC2_PUBLIC_IP', default='3.95.239.25')}",  # EC2 public IP
+    f"https://{config('EC2_PUBLIC_IP', default='3.95.239.25')}",  # For future SSL
     "http://localhost:5173",
     "http://localhost:3000",
     "https://your-frontend.vercel.app",
@@ -87,30 +91,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "movies.wsgi.application"
 
+# Database Configuration for Docker Compose
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL', default='postgres://movie_user:new_secure_password@db:5432/movie_db'),  # Default for Docker Compose
+        conn_max_age=600,
+        ssl_require=False
+    )
+}
 
-
-import dj_database_url
-import os
-
-# Check if DATABASE_URL is set, otherwise use local fallback
-DATABASE_URL = os.getenv('DATABASE_URL')
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=600,
-            ssl_require=True  # Required for Render's PostgreSQL
-        )
-    }
-else:
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=f"postgres://{os.getenv('DB_USER', 'movie_user')}:{os.getenv('DB_PASSWORD', '3UJHkiaGUAFG937viXEfJpwM3sjkAo0r')}@{os.getenv('DB_HOST', 'localhost')}:{os.getenv('DB_PORT', '5432')}/{os.getenv('DB_NAME', 'movie_db_9xev')}",
-            conn_max_age=600,
-            ssl_require=False  # Optional for local development
-        )
+# Fallback for local development (optional, remove if using Docker exclusively)
+if 'DATABASE_URL' not in os.environ:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME', default='movie_db'),
+        'USER': config('DB_USER', default='movie_user'),
+        'PASSWORD': config('DB_PASSWORD', default='new_secure_password'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 
+# Redis Configuration (adjust if using a containerized Redis)
 REDIS_HOST = config('REDIS_HOST', default='localhost')
 REDIS_PORT = config('REDIS_PORT', default=6379, cast=int)
 REDIS_DB = config('REDIS_DB', default=0, cast=int)
@@ -174,6 +175,7 @@ LOGGING = {
     },
 }
 
+# Security Settings for Production
 SECURE_SSL_REDIRECT = not DEBUG
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
