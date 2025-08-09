@@ -1,26 +1,44 @@
-# Use an official Python runtime as a parent image
+FROM python:3.10-slim as builder
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+# System deps for building wheels
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential libpq-dev gcc \
+ && rm -rf /var/lib/apt/lists/*
+# Create virtual environment and install packages
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+ && pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Production stage
 FROM python:3.10-slim
-
-# Set working directory
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV DJANGO_SETTINGS_MODULE=movies.settings
+# Runtime deps
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends postgresql-client libpq5 curl \
+ && rm -rf /var/lib/apt/lists/*
+# Copy virtual environment from builder stage
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+# Create non-root user
+RUN adduser --disabled-password --gecos '' appuser
 WORKDIR /app
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    python3-dev \
-    musl-dev \
-    libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements file
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy project
-COPY . .
-
-# Collect static files
-RUN python manage.py collectstatic --noinput
-
-# Run gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "movies.wsgi:application"]
+# Copy project files
+COPY --chown=appuser:appuser . /app/
+# Create directories for static/media files
+RUN mkdir -p /app/staticfiles /app/media /app/logs && chown -R appuser:appuser /app
+# Copy and make entrypoint executable
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+# Switch to non-root user
+USER appuser
+EXPOSE 8000
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8000/ || exit 1
+CMD ["gunicorn", "movies.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "4", "--worker-class", "gevent", "--timeout", "120"]

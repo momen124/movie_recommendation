@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", default=False, cast=bool)  # Set to False for production on EC2
+DEBUG = config("DEBUG", default=False, cast=bool)
 
 # Allowed hosts for EC2 public IP, DNS, and local testing
 ALLOWED_HOSTS = config(
@@ -77,16 +77,12 @@ MIDDLEWARE = [
 ]
 
 # CORS settings for EC2 and local testing
-CORS_ALLOWED_ORIGINS = [
-    f"http://{config('EC2_PUBLIC_IP', default='3.95.239.25')}",
-    f"https://{config('EC2_PUBLIC_IP', default='3.95.239.25')}",
-    "http://localhost:8080",  # For local testing on EC2
-    "http://localhost:5173",  # For frontend development
-    "http://localhost:3000",  # For frontend development
-    "https://your-frontend.vercel.app",  # Replace with your actual frontend domain
-]
+CORS_ALLOWED_ORIGINS = config(
+    "CORS_ALLOWED_ORIGINS",
+    default="http://3.95.239.25:8080,https://3.95.239.25:8080,http://localhost:8080,http://localhost:5173,http://localhost:3000"
+).split(",")
 
-# CSRF trusted origins (must match CORS_ALLOWED_ORIGINS)
+# CSRF trusted origins
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 
 # URL configuration
@@ -111,16 +107,16 @@ TEMPLATES = [
 # WSGI application
 WSGI_APPLICATION = "movies.wsgi.application"
 
-# Database configuration for Docker Compose
+# Database configuration
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL', default='postgres://movie_user:new_secure_password@db:5432/movie_db'),
+        default=f"postgres://{config('DB_USER')}:{config('DB_PASSWORD')}@{config('DB_HOST')}:{config('DB_PORT')}/{config('DB_NAME')}",
         conn_max_age=600,
         ssl_require=False
     )
 }
 
-# Redis configuration (assumes Redis service in docker-compose.yml)
+# Redis configuration
 REDIS_HOST = config('REDIS_HOST', default='redis')
 REDIS_PORT = config('REDIS_PORT', default=6379, cast=int)
 REDIS_DB = config('REDIS_DB', default=0, cast=int)
@@ -176,7 +172,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'debug.log',
+            'filename': BASE_DIR / 'logs' / 'debug.log',
         },
         'console': {
             'level': 'DEBUG',
@@ -193,8 +189,8 @@ LOGGING = {
 }
 
 # Security settings for production
-SECURE_SSL_REDIRECT = not DEBUG  # Redirect to HTTPS in production
-SESSION_COOKIE_SECURE = not DEBUG  # Use secure cookies in production
-CSRF_COOKIE_SECURE = not DEBUG  # Use secure CSRF cookies in production
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
