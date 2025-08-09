@@ -1,474 +1,375 @@
-# movie_recommendation
-Movie Website API Documentation
-Overview
-The Movie Website API is a RESTful API built with Django REST Framework (DRF) and Python 3. It allows users to register, log in, browse movies, and manage a list of favorite movies. The API integrates with The Movie Database (TMDB) for movie data and uses JSON Web Tokens (JWT) for authentication. Redis caching optimizes performance for frequently accessed endpoints.
-This documentation covers the API’s endpoints, authentication, request/response formats, and deployment considerations. The base URL for all endpoints is /api/.
-Setup
-Prerequisites
+# 🎬 Movie Recommendation API
 
-Python 3.8+
-Django 5.2
-Django REST Framework
-Redis (for caching)
-PostgreSQL (recommended for production)
-TMDB API key
+A RESTful API built with Django REST Framework and Python 3. It enables users to **register**, **log in**, **browse movies**, and **manage favorite movies**, integrating data from [The Movie Database (TMDB)](https://www.themoviedb.org/) and using **JWT authentication** with **Redis caching** for optimized performance.
 
-Installation
+---
 
-Clone the Repository:
-git clone <repository-url>
-cd movie-app
+## 🚀 Features
 
+- User Registration & Authentication (JWT)
+- Browse Movies (via TMDB API)
+- Add / Remove Favorite Movies
+- Redis Caching for Performance
+- PostgreSQL for Production
+- Secure Deployment Configuration
 
-Install Dependencies:
-pip install -r requirements.txt
+---
 
-Example requirements.txt:
-django==5.2
-djangorestframework==3.15
-djangorestframework-simplejwt==5.3
-django-redis==5.4
-psycopg2-binary==2.9
-requests==2.31
+## 📦 Setup
 
+### ✅ Prerequisites
 
-Configure Environment Variables:Create a .env file:
-SECRET_KEY=your-django-secret-key
-TMDB_API_KEY=your-tmdb-api-key
-REDIS_URL=redis://localhost:6379/1
-DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+- Python 3.8+
+- Django 5.2
+- Django REST Framework
+- PostgreSQL (recommended)
+- Redis
+- TMDB API Key
 
+### 📥 Installation
 
-Run Migrations:
-python manage.py migrate
+1. **Clone the Repository**
+   ```bash
+   git clone <repository-url>
+   cd movie-app
+   ```
 
+2. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Start Development Server:
-python manage.py runserver
+   **requirements.txt:**
+   ```txt
+   django==5.2
+   djangorestframework==3.15
+   djangorestframework-simplejwt==5.3
+   django-redis==5.4
+   psycopg2-binary==2.9
+   requests==2.31
+   ```
 
+3. **Configure Environment Variables**
 
-Start Redis:
-redis-server
+   Create a `.env` file:
+   ```env
+   SECRET_KEY=your-django-secret-key
+   TMDB_API_KEY=your-tmdb-api-key
+   REDIS_URL=redis://localhost:6379/1
+   DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+   ```
 
+4. **Run Migrations**
+   ```bash
+   python manage.py migrate
+   ```
 
+5. **Start Development Server**
+   ```bash
+   python manage.py runserver
+   ```
 
-Authentication
-The API uses JWT for authentication via djangorestframework-simplejwt. Users must authenticate to access protected endpoints (/api/favorite-movies/, /api/movies/<id>/).
-Obtaining a Token
+6. **Start Redis**
+   ```bash
+   redis-server
+   ```
 
-Endpoint: POST /api/token/
-Description: Authenticates a user and returns access and refresh tokens.
-Request:{
+---
+
+## 🔐 Authentication
+
+JWT-based authentication using `djangorestframework-simplejwt`.
+
+### 🔑 Obtain Token
+
+**POST** `/api/token/`
+
+**Request:**
+```json
+{
   "username": "string",
   "password": "string"
 }
+```
 
-
-Response (200 OK):{
+**Response:**
+```json
+{
   "access": "string",
   "refresh": "string",
   "user": {
-    "id": number,
-    "username": "string",
-    "email": "string",
-    "favorite_movies": [number]
+    "id": 1,
+    "username": "testuser",
+    "email": "test@example.com",
+    "favorite_movies": [1, 2]
   }
 }
+```
 
+### 🔄 Refresh Token
 
-Errors:
-400 Bad Request: Invalid credentials.{"detail": "No active account found with the given credentials"}
+**POST** `/api/token/refresh/`
 
-
-429 Too Many Requests: Rate limit exceeded.
-
-
-
-Refreshing a Token
-
-Endpoint: POST /api/token/refresh/
-Description: Refreshes an expired access token using a refresh token.
-Request:{
+**Request:**
+```json
+{
   "refresh": "string"
 }
+```
 
-
-Response (200 OK):{
+**Response:**
+```json
+{
   "access": "string"
 }
+```
 
+### 🔐 Authorization Header
 
-Errors:
-401 Unauthorized: Invalid or expired refresh token.{"detail": "Token is invalid or expired"}
-
-
-
-
-
-Authorization Header
-Protected endpoints require the Authorization header:
+```http
 Authorization: Bearer <access_token>
+```
 
-Endpoints
-User Registration
+---
 
-Endpoint: POST /api/register/
-Description: Creates a new user account.
-Request:{
+## 📚 API Endpoints
+
+### 👤 User Registration
+
+**POST** `/api/register/`
+
+**Request:**
+```json
+{
   "username": "string",
   "email": "string",
   "password": "string"
 }
+```
 
-
-Response (201 Created):{
-  "id": number,
+**Response:**
+```json
+{
+  "id": 1,
   "username": "string",
   "email": "string",
   "favorite_movies": []
 }
+```
 
+---
 
-Errors:
-400 Bad Request: Invalid or missing fields, duplicate username/email.{
-  "username": ["A user with that username already exists."],
-  "email": ["This field must be unique."]
-}
+### 🎞️ List Movies
 
+**GET** `/api/movies/?page=1`
 
+- Public access
+- Supports pagination
 
-
-
-List Movies
-
-Endpoint: GET /api/movies/?page=<number>
-Description: Retrieves a paginated list of movies from TMDB.
-Authentication: Optional (public access).
-Query Parameters:
-page (optional, default=1): Page number for pagination.
-
-
-Response (200 OK):{
-  "count": number,
-  "next": "string | null",
-  "previous": "string | null",
+**Response:**
+```json
+{
+  "count": 100,
+  "next": "url",
+  "previous": null,
   "results": [
     {
-      "id": number,
-      "title": "string",
-      "release_date": "YYYY-MM-DD",
-      "description": "string",
-      "poster_path": "string | null"
+      "id": 1,
+      "title": "Inception",
+      "release_date": "2010-07-16",
+      "description": "A mind-bending thriller...",
+      "poster_path": "url"
     }
   ]
 }
+```
 
+---
 
-Errors:
-400 Bad Request: Invalid page number.{"detail": "Invalid page."}
+### 🎬 Get Movie Details
 
+**GET** `/api/movies/<id>/`
 
+- Public access
 
-
-
-Get Movie Details
-
-Endpoint: GET /api/movies/<id>/
-Description: Retrieves detailed information for a specific movie.
-Authentication: Optional (public access).
-Response (200 OK):{
-  "id": number,
-  "title": "string",
-  "release_date": "YYYY-MM-DD",
-  "description": "string",
-  "poster_path": "string | null",
-  "genres": [
-    {
-      "id": number,
-      "name": "string"
-    }
-  ],
-  "runtime": number | null,
-  "vote_average": number | null,
-  "vote_count": number | null,
-  "overview": "string",
-  "backdrop_path": "string | null"
+**Response:**
+```json
+{
+  "id": 1,
+  "title": "Inception",
+  "release_date": "2010-07-16",
+  "description": "A mind-bending thriller...",
+  "poster_path": "url",
+  "genres": [{ "id": 1, "name": "Sci-Fi" }],
+  "runtime": 148,
+  "vote_average": 8.8,
+  "vote_count": 10000,
+  "overview": "A thief who steals corporate secrets...",
+  "backdrop_path": "url"
 }
+```
 
+---
 
-Errors:
-404 Not Found: Movie does not exist.{"detail": "Not found."}
+### ⭐ List Favorite Movies
 
+**GET** `/api/favorite-movies/?page=1`
 
+- Requires authentication
 
-
-
-List Favorite Movies
-
-Endpoint: GET /api/favorite-movies/?page=<number>
-Description: Retrieves a paginated list of the authenticated user’s favorite movies.
-Authentication: Required.
-Query Parameters:
-page (optional, default=1): Page number for pagination.
-
-
-Response (200 OK):{
-  "count": number,
-  "next": "string | null",
-  "previous": "string | null",
+**Response:**
+```json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
   "results": [
     {
-      "id": number,
+      "id": 1,
       "movie": {
-        "id": number,
-        "title": "string",
-        "release_date": "YYYY-MM-DD",
-        "description": "string",
-        "poster_path": "string | null"
+        "id": 1,
+        "title": "Inception",
+        "release_date": "2010-07-16",
+        "description": "A mind-bending thriller...",
+        "poster_path": "url"
       },
-      "added_at": "YYYY-MM-DDTHH:MM:SSZ"
+      "added_at": "2024-08-07T12:00:00Z"
     }
   ]
 }
+```
 
+---
 
-Errors:
-401 Unauthorized: Missing or invalid token.{"detail": "Authentication credentials were not provided."}
+### ➕ Add Favorite Movie
 
+**POST** `/api/favorite-movies/`
 
-400 Bad Request: Invalid page number.{"detail": "Invalid page."}
-
-
-
-
-
-Add Favorite Movie
-
-Endpoint: POST /api/favorite-movies/
-Description: Adds a movie to the authenticated user’s favorites.
-Authentication: Required.
-Request:{
-  "movie_id": number
+**Request:**
+```json
+{
+  "movie_id": 1
 }
+```
 
-
-Response (201 Created):{
-  "id": number,
-  "movie": {
-    "id": number,
-    "title": "string",
-    "release_date": "YYYY-MM-DD",
-    "description": "string",
-    "poster_path": "string | null"
-  },
-  "added_at": "YYYY-MM-DDTHH:MM:SSZ"
+**Response (201 Created):**
+```json
+{
+  "id": 1,
+  "movie": { ... },
+  "added_at": "2024-08-07T12:00:00Z"
 }
+```
 
+---
 
-Errors:
-400 Bad Request: Movie already in favorites or invalid movie ID.{
-  "non_field_errors": ["This movie is already in your favorites."],
-  "movie_id": ["Invalid pk \"<id>\" - object does not exist."]
-}
+### ❌ Remove Favorite Movie
 
+**DELETE** `/api/favorite-movies/<id>/`
 
-401 Unauthorized: Missing or invalid token.
+- Response: `204 No Content`
 
+---
 
+## 🧩 Models
 
-Remove Favorite Movie
+### User
+- `id`: integer
+- `username`: string
+- `email`: string
+- `favorite_movies`: array of movie IDs
 
-Endpoint: DELETE /api/favorite-movies/<id>/
-Description: Removes a movie from the authenticated user’s favorites.
-Authentication: Required.
-Response (204 No Content):
-No body returned.
+### Movie
+- `id`, `title`, `release_date`, `description`, `poster_path`, `tmdb_id`, `genres`
 
+### FavoriteMovie
+- `id`, `user`, `movie`, `added_at`
 
-Errors:
-404 Not Found: Favorite movie ID does not exist.{"detail": "Not found."}
+---
 
+## 🚀 Caching
 
-401 Unauthorized: Missing or invalid token.
+- Redis caching enabled for `GET /api/favorite-movies/` (15 minutes).
+- Cache key: `favorite_movie_list_<user_id>_page_<page>`
+- Automatically invalidated on add/delete operations.
 
+---
 
+## ⚠️ Error Handling
 
-Models
-User
+| Code | Meaning           | Example Response                                     |
+|------|-------------------|------------------------------------------------------|
+| 400  | Bad Request       | `{"detail": "Invalid page."}`                        |
+| 401  | Unauthorized      | `{"detail": "Authentication credentials were not provided."}` |
+| 404  | Not Found         | `{"detail": "Not found."}`                           |
+| 429  | Too Many Requests | `{"detail": "Rate limit exceeded."}`                 |
+| 500  | Server Error      | `{"detail": "Server error. Please try again."}`      |
 
-id: Integer (unique identifier)
-username: String (unique, max 150 characters)
-email: String (unique)
-favorite_movies: Array of movie IDs (optional)
+---
 
-Movie
+## 🛡 Deployment
 
-id: Integer (unique identifier)
-title: String
-release_date: Date (YYYY-MM-DD)
-description: String
-poster_path: String (optional, TMDB URL)
-tmdb_id: Integer (TMDB identifier)
-genres: Array of { id: number, name: string }
+### Security Settings
+- Store secrets in `.env`
+- Set `DEBUG = False`
+- Use `HTTPS` and secure cookies
 
-FavoriteMovie
+### Database
+- PostgreSQL recommended
 
-id: Integer (unique identifier)
-user: ForeignKey to User
-movie: ForeignKey to Movie
-added_at: DateTime (YYYY-MM-DDTHH:MM:SSZ)
+### Redis
+- Use `django-redis` for caching
 
-Caching
-
-The FavoriteMovieViewSet uses Redis caching (cache_page(60 * 15)) for GET /api/favorite-movies/.
-Cache keys are invalidated on POST and DELETE operations using perform_create and perform_destroy.
-Cache key format: favorite_movie_list_<user_id>_page_<page>.
-
-Error Handling
-
-400 Bad Request: Invalid request data.
-401 Unauthorized: Missing or invalid authentication token.
-404 Not Found: Resource not found (e.g., movie or favorite ID).
-429 Too Many Requests: Rate limit exceeded.
-500 Internal Server Error: Server-side issues (e.g., TMDB API failure).
-
-Deployment
-Follow the Django 5.2 Deployment Checklist for production.
-Key Configurations
-
-Secure Settings:
-# settings.py
-SECRET_KEY = 'your-secret-key'  # Store in environment variable
-DEBUG = False
-ALLOWED_HOSTS = ['your-domain.com']
-
-
-Database:Use PostgreSQL:
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'your_db',
-        'USER': 'your_user',
-        'PASSWORD': 'your_password',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
-
-CORS:
-CORS_ALLOWED_ORIGINS = ['https://your-frontend-domain.com']
-CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-
-
-Static Files:
-STATIC_ROOT = '/path/to/static/'
-
-Run:
+### Static Files
+```bash
 python manage.py collectstatic
+```
 
+### Gunicorn + Nginx
+```bash
+gunicorn --workers 3 movieapp.wsgi:application
+```
 
-Gunicorn and Nginx:
-pip install gunicorn
-gunicorn --workers 3 your_project_name.wsgi:application
+---
 
-server {
-    listen 80;
-    server_name your-domain.com;
-    location /static/ {
-        alias /path/to/static/;
-    }
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-}
+## 🧪 Testing (curl)
 
+```bash
+# Register
+curl -X POST http://127.0.0.1:8000/api/register/ -H "Content-Type: application/json" -d '{"username": "testuser", "email": "test@example.com", "password": "test1234"}'
 
-Redis:
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://your-redis-host:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
-}
+# Login
+curl -X POST http://127.0.0.1:8000/api/token/ -H "Content-Type: application/json" -d '{"username": "testuser", "password": "test1234"}'
 
+# Get Favorites
+curl -X GET http://127.0.0.1:8000/api/favorite-movies/?page=1 -H "Authorization: Bearer <access_token>"
 
+# Add Favorite
+curl -X POST http://127.0.0.1:8000/api/favorite-movies/ -H "Authorization: Bearer <access_token>" -H "Content-Type: application/json" -d '{"movie_id": 1}'
 
-Security Considerations
+# Remove Favorite
+curl -X DELETE http://127.0.0.1:8000/api/favorite-movies/1/ -H "Authorization: Bearer <access_token>"
+```
 
-Use HttpOnly, Secure, and SameSite=Lax cookies for JWT tokens in production:class CustomTokenObtainPairView(TokenObtainPairView):
-    def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
-        response.set_cookie(
-            key='access_token',
-            value=response.data['access'],
-            httponly=True,
-            secure=True,
-            samesite='Lax',
-            max_age=3600
-        )
-        response.set_cookie(
-            key='refresh_token',
-            value=response.data['refresh'],
-            httponly=True,
-            secure=True,
-            samesite='Lax',
-            max_age=86400
-        )
-        return response
+---
 
+## 🧠 Debugging
 
-Enable HTTPS in production.
-Implement rate limiting with django-ratelimit or similar.
+```bash
+# View logs
+python manage.py runserver
 
-Testing
-Test endpoints using curl or Postman.
-Register
-curl -X POST http://127.0.0.1:8000/api/register/ \
-  -H "Content-Type: application/json" \
-  -d '{"username": "testuser", "email": "test@example.com", "password": "test1234"}'
+# Django shell
+python manage.py shell
 
-Login
-curl -X POST http://127.0.0.1:8000/api/token/ \
-  -H "Content-Type: application/json" \
-  -d '{"username": "testuser", "password": "test1234"}'
+# Clear Redis
+redis-cli FLUSHALL
+```
 
-Get Favorites
-curl -X GET http://127.0.0.1:8000/api/favorite-movies/?page=1 \
-  -H "Authorization: Bearer <access_token>"
+---
 
-Add Favorite
-curl -X POST http://127.0.0.1:8000/api/favorite-movies/ \
-  -H "Authorization: Bearer <access_token>" \
-  -H "Content-Type: application/json" \
-  -d '{"movie_id": 1}'
+## 📌 Notes
 
-Remove Favorite
-curl -X DELETE http://127.0.0.1:8000/api/favorite-movies/<id>/ \
-  -H "Authorization: Bearer <access_token>"
-
-Debugging
-
-Check Logs: Django logs (python manage.py runserver) show request status (e.g., 200, 401).
-Verify Database:from movieapp.models import User, Movie, FavoriteMovie
-User.objects.all().values('id', 'username', 'email')
-Movie.objects.all().values('id', 'title', 'tmdb_id')
-FavoriteMovie.objects.all().values('id', 'user__username', 'movie__title')
-
-
-Clear Redis Cache:redis-cli FLUSHALL
-
-
-
-Notes
-
-The API integrates with TMDB for movie data. Ensure a valid TMDB_API_KEY is set.
-Cache invalidation occurs on POST and DELETE for /api/favorite-movies/.
-Frontend should handle 204 No Content responses for DELETE requests without attempting JSON parsing.
+- TMDB integration requires a valid `TMDB_API_KEY`.
+- Redis improves performance by caching frequent reads.
+- Secure your production setup with HTTPS and cookie security.
